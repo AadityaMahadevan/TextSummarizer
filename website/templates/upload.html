@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h2>Upload</h2>
+    <div class="column" >
+        <form method="post" enctype="multipart/form-data" >
+            {% csrf_token %}
+    
+            <input type="file" name="document">
+            <br>
+            <br>
+            <button type="submit" name="document">Upload</button>
+        </form>
+    </div>
+    
+    {% if file_content %}
+    <p>Uploaded file preview:</p>
+    <div style="overflow-y: scroll; height:300px; ">
+        "{{ file_content }}"
+    
+    </div>
+    <br>
+    <div class="column" >
+        <form method='get' action="summary">
+            <p> Enter retention level: </p>            
+            <input type="number" name="retention" >
+            <button type='submit' name='retention'> Generate Summary </button>
+        </form> 
+    </div>
+    
+
+    {% endif %} 
+
+{% endblock %}

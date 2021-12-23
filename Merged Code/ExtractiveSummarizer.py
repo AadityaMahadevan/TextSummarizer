@@ -56,7 +56,7 @@ def removeSpecialCharacters(text):
 
 def tokenizeSentences():
   file = 'inputtext.txt'
-  file = open(file , 'r')
+  file = open(file , 'r', encoding="utf8")
   text = file.read()
   #Tokenize Sentences
   tokenized_sentence = sent_tokenize(text)
@@ -189,16 +189,25 @@ tokenized_words, tokenized_sentences, word_count = tokenizeSentences()
 tokenized_words = lemmatizeWords(tokenized_words)
 word_frequency = calculateWordFrequency(tokenized_words)
 
-"""Taking input from the user: Percentage of retained context from the original text in the summary
+"""Taking input from the user: Percentage of retained context from the original text in the summary"""
 
-"""
 default_retention_percentage = 15
+default_overflow_percentage = 90
+
 retention_percentage = int(input('Percentage of information to retain (in percent):'))
-no_of_sentences = int(((retention_percentage + default_retention_percentage) * len(tokenized_sentences))/100)
+if retention_percentage<=30:
+    default_retention_percentage = default_retention_percentage*2
+elif retention_percentage >=75:
+    default_retention_percentage = 0
+
+if retention_percentage + default_retention_percentage >= 100:
+    int(((default_overflow_percentage) * len(tokenized_sentences))/100)
+else:
+    no_of_sentences = int(((retention_percentage + default_retention_percentage) * len(tokenized_sentences))/100)
 print("Number of sentences in the summary: ", no_of_sentences, "\nTotal number of sentences: ", len(tokenized_sentences))
 
-"""Generate summary by sorting the sentences based on the sum of tf-idf scores of all the words in the sentence."""
 
+"""Generate summary by sorting the sentences based on the sum of tf-idf scores of all the words in the sentence."""
 c = 1
 sentence_scores = {}
 for sent in tokenized_sentences:

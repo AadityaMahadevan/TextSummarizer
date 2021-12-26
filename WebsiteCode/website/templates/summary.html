@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Extractive Summary</h2>
+<div style="overflow-y: scroll; height:300px; ">
+    "{{ extractive_summary }}"
+
+</div>
+<br>
+<h2>Abstractive Summary</h2>
+<div style="overflow-y: scroll; height:300px; ">
+    "{{ abstractive_summary }}"
+
+</div>
+<br>
+<h2>One-Line Summary</h2>
+<div style="overflow-y: scroll; height:300px; ">
+    "{{ one_line_summary }}"
+
+</div>
+
+{% endblock %}

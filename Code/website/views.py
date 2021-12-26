@@ -42,7 +42,7 @@ def summary(request):
         context={}
         retention=int(request.GET.getlist("retention")[0])
         print(retention)
-        summary=extractive.main(CONTENT,retention)
+        summary= extractive.main(CONTENT,retention)
         context['file_summary']=summary
 
     return render(request, 'summary.html',context)

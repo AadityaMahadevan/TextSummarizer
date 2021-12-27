@@ -23,15 +23,41 @@ def upload(request):
     if request.method== 'POST' and "document" in request.POST:
         uploaded_file= request.FILES['document']
         print(uploaded_file.name)
-        fs= FileSystemStorage()
+        fs= FileSystemStorage(location='website/media/documents/')
         file_name=fs.save(uploaded_file.name, uploaded_file)
         
-        file_content=open(os.path.join(BASE_DIR,'media',file_name),"r",encoding="utf-8").read()
+        file_content=open(os.path.join(BASE_DIR,'media\\documents',file_name),"r",encoding="utf-8").read()
         print("\n"+file_content)
         context['file_content']=file_content
         CONTENT=file_content
 
-    return render(request, 'upload.html',context)
+    return render(request, 'TextUpload.html',context)
+
+def mediaUpload(request):
+    context={}
+    global CONTENT
+    print(request.POST)
+    if request.method== 'POST' and "media" in request.POST:
+        uploaded_file= request.FILES['media']
+        print(uploaded_file.name)
+        fs= FileSystemStorage(location='website/media/AV/')
+        file_name=fs.save(uploaded_file.name, uploaded_file)
+        
+        #file_content=open(os.path.join(BASE_DIR,'media/AV',file_name),"r",encoding="utf-8").read()
+        # print("\n"+file_content)
+
+        #####################################################
+        ######### ADD ASR MODULE REDIRECT HERE#############
+        #################################################
+        ### BELOW 3 LINES ARE PLACEHOLDERS###########3
+        file_content=open(os.path.join(BASE_DIR,'media\\documents','essay2.txt'),"r",encoding="utf-8").read()
+        print("\n"+file_content)
+
+        context['file_content']=file_content
+        CONTENT=file_content
+
+    return render(request, 'MediaUpload.html',context)
+
 
 def summary(request):
     global CONTENT

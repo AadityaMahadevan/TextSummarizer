@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% block content %}
+<body>
+<h2>Upload your document file</h2>
+<div class="column">
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <input type="file" name="document" accept=".doc,.docx,.txt">
+        <br>
+        <br>
+        <button type="submit" name="document">Upload</button>
+    </form>
+</div>
+
+{% if file_content %}
+<p>Uploaded file preview:</p>
+<div style="overflow-y: scroll; height:300px; ">
+    "{{ file_content }}"
+
+</div>
+<br>
+<div class="column">
+    <form method='get' action="summary">
+        <p> Enter retention level: </p>
+        <input type="number" name="retention">
+        <button type='submit' name='retention' id='load'> Generate Summary </button>
+    </form>
+</div>
+<!-- <script>
+    $('load').click(function () {
+        $('body').append('<div style="" id="loadingDiv"><div class="loader">Loading...</div></div>');
+        $(window).on('load', function () {
+            setTimeout(removeLoader, 2000); //wait for page load PLUS two seconds.
+        });
+        function removeLoader() {
+            $("#loadingDiv").fadeOut(500, function () {
+                // fadeOut complete. Remove the loading div
+                $("#loadingDiv").remove(); //makes page more lightweight 
+            });
+        }
+    });
+
+</script> -->
+
+</body>
+{% endif %}
+
+{% endblock %}

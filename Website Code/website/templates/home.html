@@ -1,5 +1,20 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <h1> home </h1>
+  <h1> Upload your file as a document or audio/video</h1>
+  <div class="card" style="width: 18rem;">
+    <div class="card-body">
+      <h5 class="card-title">Upload document file</h5>
+      <p class="card-text">Accepted extensions: .doc, .docx, .txt, .odt, .pdf</p>
+      <a href="{% url 'TextUpload' %}" class="btn btn-primary">Upload</a>
+    </div>
+  </div>
+  <h2>OR</h2>
+  <div class="card" style="width: 18rem;">
+    <div class="card-body">
+      <h5 class="card-title">Upload media file</h5>
+      <p class="card-text">Accepted extensions: .mp3, .mp4, .mp4a</p>
+      <a href="{% url 'MediaUpload' %}" class="btn btn-primary">Upload</a>
+    </div>
+  </div>
 {% endblock %}

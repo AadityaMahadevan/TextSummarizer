@@ -28,8 +28,8 @@ bart_tokenizer = BartTokenizer.from_pretrained(BART_PATH, output_past=True)
 
 
 import nltk
-nltk.download('punkt')
-nltk.download('stopwords')
+# nltk.download('punkt')
+# nltk.download('stopwords')
 device = 'cuda'
 
 def nest_sentences(document):

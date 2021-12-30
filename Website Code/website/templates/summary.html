@@ -2,7 +2,29 @@
 {% block content %}
 
 
-<h2>Extractive Summary</h2>
+<div class="card w-75 mx-auto">
+    <div class="card-body">
+      <h5 class="card-title">Extractive Summary</h5>
+      <p class="card-text">{{ extractive_summary }}</p>
+    </div>
+</div>
+
+<div class="card w-75 mx-auto">
+    <div class="card-body">
+      <h5 class="card-title">Abstractive Summary</h5>
+      <p class="card-text">{{ abstractive_summary }}</p>
+    </div>
+</div>
+
+<div class="card w-75 mx-auto">
+    <div class="card-body">
+      <h5 class="card-title">One-Line Summary</h5>
+      <p class="card-text">{{ one_line_summary }}</p>
+    </div>
+</div>
+
+<!-- <h2>Extractive Summary</h2>
+
 <div style="overflow-y: scroll; height:300px; ">
     "{{ extractive_summary }}"
 
@@ -15,9 +37,9 @@
 </div>
 <br>
 <h2>One-Line Summary</h2>   
-<div style="overflow-y: scroll; height:300px; ">
+<div style="height:300px; ">
     "{{ one_line_summary }}"
 
-</div>
+</div> -->
 
 {% endblock %}

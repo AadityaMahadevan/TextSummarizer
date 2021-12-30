@@ -6,15 +6,22 @@ from pathlib import Path
 import os
 from .Summarizerpythonfiles import ExtractiveSummarizer as extractive
 from .Summarizerpythonfiles import AbstractiveSummarizer as abstractive
+import urllib
+from django.contrib.auth.decorators import login_required
+
 
 # def index(request):
 #     return HttpResponse('Just started')
 BASE_DIR = Path(__file__).resolve().parent
 
-class Home(TemplateView):
-    template_name='home.html'
+# @login_required
+# class Home(TemplateView):
+#     template_name='home.html'
 
 CONTENT=''
+@login_required
+def home(request):
+    return render(request, 'home.html')
 
 def upload(request):
     context={}
@@ -58,6 +65,9 @@ def mediaUpload(request):
 
     return render(request, 'MediaUpload.html',context)
 
+    
+def login(request):
+    return render(request,'account/login.html')
 
 def summary(request):
     global CONTENT

@@ -17,10 +17,15 @@ from django.contrib import admin
 from django.urls import path,include
 from django.conf import settings
 from django.conf.urls.static import static
+from website import views as websiteviews
 
 urlpatterns = [
+    path('',include("website.urls")),
+
+    path('accounts/', include('allauth.urls')),
+
     path('admin/', admin.site.urls),
-    path('',include("website.urls"))
+    
 ]
 
 if settings.DEBUG:

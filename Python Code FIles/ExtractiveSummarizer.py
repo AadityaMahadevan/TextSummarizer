@@ -54,10 +54,7 @@ def removeSpecialCharacters(text):
 
 """Function to tokenize sentences"""
 
-def tokenizeSentences():
-  file = 'inputtext.txt'
-  file = open(file , 'r', encoding="utf8")
-  text = file.read()
+def tokenizeSentences(text):
   #Tokenize Sentences
   tokenized_sentence = sent_tokenize(text)
   #Removing Special Characters
@@ -185,53 +182,53 @@ def calculateSentenceScore(sentence,frequency,sentences):
 
 """Calling word tokenization function, performing lemmatization on tokenized words and calculating word frequency"""
 
-tokenized_words, tokenized_sentences, word_count = tokenizeSentences()
-tokenized_words = lemmatizeWords(tokenized_words)
-word_frequency = calculateWordFrequency(tokenized_words)
+def get_extractive_summary(retention_percentage, text):
+    tokenized_words, tokenized_sentences, word_count = tokenizeSentences(text)
+    tokenized_words = lemmatizeWords(tokenized_words)
+    word_frequency = calculateWordFrequency(tokenized_words)
 
-"""Taking input from the user: Percentage of retained context from the original text in the summary"""
+    """Taking input from the user: Percentage of retained context from the original text in the summary"""
 
-default_retention_percentage = 15
-default_overflow_percentage = 90
+    default_retention_percentage = 15
+    default_overflow_percentage = 90
 
-retention_percentage = int(input('Percentage of information to retain (in percent):'))
-if retention_percentage<=30:
-    default_retention_percentage = default_retention_percentage*2
-elif retention_percentage >=75:
-    default_retention_percentage = 0
+    if retention_percentage<=30:
+        default_retention_percentage = default_retention_percentage*2
+    elif retention_percentage >=75:
+        default_retention_percentage = 0
 
-if retention_percentage + default_retention_percentage >= 100:
-    int(((default_overflow_percentage) * len(tokenized_sentences))/100)
-else:
-    no_of_sentences = int(((retention_percentage + default_retention_percentage) * len(tokenized_sentences))/100)
-print("Number of sentences in the summary: ", no_of_sentences, "\nTotal number of sentences: ", len(tokenized_sentences))
-
-
-"""Generate summary by sorting the sentences based on the sum of tf-idf scores of all the words in the sentence."""
-c = 1
-sentence_scores = {}
-for sent in tokenized_sentences:
-    sentence_importance = calculateSentenceScore(sent,word_frequency,tokenized_sentences)
-    sentence_scores[c] = sentence_importance
-    c = c+1
-sentence_scores = sorted(sentence_scores.items(), key=operator.itemgetter(1),reverse=True)
-count = 0
-summary = []
-sentence_no = []
-for word in sentence_scores:
-    if count < no_of_sentences:
-        sentence_no.append(word[0])
-        count = count+1
+    if retention_percentage + default_retention_percentage >= 100:
+        int(((default_overflow_percentage) * len(tokenized_sentences))/100)
     else:
-      break
-sentence_no.sort()
-count = 1
-for sentence in tokenized_sentences:
-    if count in sentence_no:
-       summary.append(sentence)
-    count = count+1
+        no_of_sentences = int(((retention_percentage + default_retention_percentage) * len(tokenized_sentences))/100)
+    print("Number of sentences in the summary: ", no_of_sentences, "\nTotal number of sentences: ", len(tokenized_sentences))
 
-summary = " ".join(summary)
+
+    """Generate summary by sorting the sentences based on the sum of tf-idf scores of all the words in the sentence."""
+    c = 1
+    sentence_scores = {}
+    for sent in tokenized_sentences:
+        sentence_importance = calculateSentenceScore(sent,word_frequency,tokenized_sentences)
+        sentence_scores[c] = sentence_importance
+        c = c+1
+    sentence_scores = sorted(sentence_scores.items(), key=operator.itemgetter(1),reverse=True)
+    count = 0
+    summary = []
+    sentence_no = []
+    for word in sentence_scores:
+        if count < no_of_sentences:
+            sentence_no.append(word[0])
+            count = count+1
+        else:
+            break
+    sentence_no.sort()
+    count = 1
+    for sentence in tokenized_sentences:
+        if count in sentence_no:
+            summary.append(sentence)
+        count = count+1
+    summary = " ".join(summary)
+    return summary, retention_percentage, no_of_sentences, word_count, default_retention_percentage, tokenized_sentences, tokenized_words
 
 
 

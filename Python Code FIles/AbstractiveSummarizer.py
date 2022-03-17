@@ -8,13 +8,13 @@ Original file is located at
 """
 
 #!pip install transformers==2.11.0
-from ExtractiveSummarizer import summary as extractive_summary
-from ExtractiveSummarizer import retention_percentage as extractive_retention_percentage
-from ExtractiveSummarizer import no_of_sentences as extractive_num_sentences
-from ExtractiveSummarizer import word_count as extractive_word_count
-from ExtractiveSummarizer import default_retention_percentage as default_retention_percentage_extractive
+# from ExtractiveSummarizer import summary as extractive_summary
+# from ExtractiveSummarizer import retention_percentage as extractive_retention_percentage
+# from ExtractiveSummarizer import no_of_sentences as extractive_num_sentences
+# from ExtractiveSummarizer import word_count as extractive_word_count
+# from ExtractiveSummarizer import default_retention_percentage as default_retention_percentage_extractive
 
-from OneLineSummary import preds as oneLineSummaryList
+# from OneLineSummary import preds as oneLineSummaryList
 
 from transformers import BartTokenizer, BartForConditionalGeneration, BartConfig
 from transformers import pipeline
@@ -25,11 +25,11 @@ BART_PATH = 'facebook/bart-large-cnn'
 bart_model = BartForConditionalGeneration.from_pretrained(BART_PATH, output_past=True)
 bart_tokenizer = BartTokenizer.from_pretrained(BART_PATH, output_past=True)
 
+import nltk
+nltk.download('punkt')
+nltk.download('stopwords')
 
-DOCUMENT = extractive_summary
-DOCUMENT = re.sub(r'\n|\r', ' ', DOCUMENT)
-DOCUMENT = re.sub(r' +', ' ', DOCUMENT)
-DOCUMENT = DOCUMENT.strip()
+#device = 'cuda'
 
 def nest_sentences(document):
   nested = []
@@ -55,20 +55,6 @@ def nest_sentences(document):
   return nested
 
 
-import nltk
-nltk.download('punkt')
-nltk.download('stopwords')
-nested = nest_sentences(DOCUMENT)
-device = 'cuda'
-
-default_error_percentage = 15
-min_summary_length = int((((extractive_retention_percentage - default_error_percentage)/100)*extractive_word_count)/len(nested))
-max_summary_length = int(((extractive_retention_percentage + default_error_percentage)/100)*extractive_word_count/len(nested))
-
-print("Min summary length", min_summary_length)
-print("Max summary length", max_summary_length)
-print("Extractive Number of Sentences", extractive_num_sentences)
-
 def generate_summary_HF(nested_sentences):
   summaries = []
   for nested in nested_sentences:
@@ -81,13 +67,13 @@ def generate_summary_HF(nested_sentences):
   return summaries
 
 
-def generate_summary(nested_sentences):
+def generate_summary(nested_sentences, min_summary_length, max_summary_length):
   device = 'cuda'
   summaries = []
   for nested in nested_sentences:
     input_tokenized = bart_tokenizer.encode(' '.join(nested), truncation=False, return_tensors='pt', add_special_tokens = False, verbose = True)
-    input_tokenized = input_tokenized.to(device)
-    summary_ids = bart_model.to('cuda').generate(input_tokenized,
+    #input_tokenized = input_tokenized.to(device)
+    summary_ids = bart_model.generate(input_tokenized,
                                   
                                       num_beams=5,
                                       no_repeat_ngram_size=2,
@@ -100,25 +86,54 @@ def generate_summary(nested_sentences):
   #summaries = [sentence for sublist in summaries for sentence in sublist]
   return summaries
 
-print("\n\nExtractive/Long Summary: ")
-print("Retention Percentage", extractive_retention_percentage+default_retention_percentage_extractive)
-print("{}".format(extractive_summary))
-
-print("\n\nAbstractive/Short Summary: ")
-if extractive_retention_percentage>=75:
-  summ = extractive_summary
-  print("Retention Percentage", extractive_retention_percentage)
-  print("{}".format(extractive_summary))
-else:
-  summ = generate_summary(nested)
-  #summ = generate_summary_HF(nested)
-  print("Retention percentage (Approx): ", extractive_retention_percentage)
-  print(summ)
+def get_abstractive_summary(extractive_summary, extractive_retention_percentage, extractive_word_count, extractive_num_sentences, default_retention_percentage_extractive):
+  DOCUMENT = extractive_summary
+  start = '<START>'
+  end = '<END>'
+  DOCUMENT = start + DOCUMENT +end
+  DOCUMENT = re.sub(r'\n|\r', ' ', DOCUMENT)
+  DOCUMENT = re.sub(r' +', ' ', DOCUMENT)
+  DOCUMENT = DOCUMENT.strip()
 
 
-print("\n\nOne-Line Summary: ", oneLineSummaryList[0])
+  nested = nest_sentences(DOCUMENT)
 
-#summ = generate_summary_HF(nested)
-#print(summ)
+  default_error_percentage = 15
+  min_summary_length = int((((extractive_retention_percentage - default_error_percentage)/100)*extractive_word_count)/len(nested))
+  max_summary_length = int(((extractive_retention_percentage + default_error_percentage)/100)*extractive_word_count/len(nested))
+
+  print("Min summary length", min_summary_length)
+  print("Max summary length", max_summary_length)
+  print("Extractive Number of Sentences", extractive_num_sentences)
+
+  if extractive_retention_percentage>75:
+    hybrid_summary = extractive_summary
+    hybrid_retention_percentage = extractive_retention_percentage
+  else:
+    hybrid_summary = generate_summary(nested, min_summary_length, max_summary_length)
+    hybrid_retention_percentage = extractive_retention_percentage
+  return hybrid_summary, hybrid_retention_percentage
+
+
+# print("\n\nExtractive/Long Summary: ")
+# print("Retention Percentage", extractive_retention_percentage+default_retention_percentage_extractive)
+# print("{}".format(extractive_summary))
+
+# print("\n\nHybrid/Short Summary: ")
+# if extractive_retention_percentage>=75:
+#   summ = extractive_summary
+#   print("Retention Percentage", extractive_retention_percentage)
+#   print("{}".format(extractive_summary))
+# else:
+#   summ = generate_summary(nested)
+#   #summ = generate_summary_HF(nested)
+#   print("Retention percentage (Approx): ", extractive_retention_percentage)
+#   print(summ)
+
+
+# print("\n\nOne-Line Summary: ", oneLineSummaryList[0])
+
+# #summ = generate_summary_HF(nested)
+# #print(summ)
 
 

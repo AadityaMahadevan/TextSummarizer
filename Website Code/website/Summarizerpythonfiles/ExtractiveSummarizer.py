@@ -27,17 +27,19 @@ import os
 import re
 import math
 import operator
-import sys
-from nltk.stem import WordNetLemmatizer, PorterStemmer
+# nltk.download('stopwords')
+# nltk.download('punkt')
+# nltk.download('wordnet')
+# nltk.download('averaged_perceptron_tagger')
+from nltk.stem import WordNetLemmatizer
 from nltk.tokenize import sent_tokenize,word_tokenize
 from nltk.corpus import stopwords
 from nltk.cluster.util import cosine_distance
-
-from . import OneLineSummary as oneline
-from . import AbstractiveSummarizer as abstractive
 Stopwords = set(stopwords.words('english'))
 wordlemmatizer = WordNetLemmatizer()
 
+#from google.colab import drive
+#drive.mount('/content/drive' )
 
 """> Text preprocessing
 
@@ -45,7 +47,6 @@ The pre-processing steps applied in this algorithm include removing special char
 
 Function to remove special characters from the text
 """
-
 def removeSpecialCharacters(text):
     regex = r'[^a-zA-Z0-9\s]'
     text = re.sub(regex,'',text)
@@ -53,15 +54,14 @@ def removeSpecialCharacters(text):
 
 """Function to tokenize sentences"""
 
-def tokenizeSentences(file):
-
-  text = file
+def tokenizeSentences(text):
   #Tokenize Sentences
   tokenized_sentence = sent_tokenize(text)
   #Removing Special Characters
   text = removeSpecialCharacters(str(text))
   text = re.sub(r'\d+', '', text)
   #Tokenize Words
+
   tokenized_words = word_tokenize(text)
   word_count = len(tokenized_words)
   print("Word count: ", len(tokenized_words))
@@ -106,8 +106,6 @@ def posTagging(text):
 
 def stemWords(words):
     stemmed_words = []
-    stemmer = PorterStemmer()
-
     for word in words:
        stemmed_words.append(stemmer.stem(word))
     return stemmed_words
@@ -181,22 +179,19 @@ def calculateSentenceScore(sentence,frequency,sentences):
 """Calculating Cosine Similarity"""
 
 #Calculate cosine similarity
-"""Calling word tokenization function, performing lemmatization on tokenized words and calculating word frequency"""
-def main(text,retention):
-    tokenized_words, tokenized_sentences, word_count = tokenizeSentences(text)
-    # tokenized_words, tokenized_sentences = tokenizeSentences("The_boy_who_cried_wolf.txt")
 
+"""Calling word tokenization function, performing lemmatization on tokenized words and calculating word frequency"""
+
+def get_extractive_summary(retention_percentage, text):
+    tokenized_words, tokenized_sentences, word_count = tokenizeSentences(text)
     tokenized_words = lemmatizeWords(tokenized_words)
     word_frequency = calculateWordFrequency(tokenized_words)
-    
-    """Taking input from the user: Percentage of retained context from the original text in the summary
 
-    """
+    """Taking input from the user: Percentage of retained context from the original text in the summary"""
 
     default_retention_percentage = 15
     default_overflow_percentage = 90
 
-    retention_percentage = retention
     if retention_percentage<=30:
         default_retention_percentage = default_retention_percentage*2
     elif retention_percentage >=75:
@@ -208,8 +203,8 @@ def main(text,retention):
         no_of_sentences = int(((retention_percentage + default_retention_percentage) * len(tokenized_sentences))/100)
     print("Number of sentences in the summary: ", no_of_sentences, "\nTotal number of sentences: ", len(tokenized_sentences))
 
-    """Generate summary by sorting the sentences based on the sum of tf-idf scores of all the words in the sentence."""
 
+    """Generate summary by sorting the sentences based on the sum of tf-idf scores of all the words in the sentence."""
     c = 1
     sentence_scores = {}
     for sent in tokenized_sentences:
@@ -233,15 +228,15 @@ def main(text,retention):
             summary.append(sentence)
         count = count+1
     summary = " ".join(summary)
-
-    """Print Summary"""
-
-    #print("Summary:")
-    # lines = summary.split('.')
+    return summary, retention_percentage, no_of_sentences, word_count, default_retention_percentage, tokenized_sentences, tokenized_words
 
 
-    # for line in lines:
-    #   print(line+'. ')
-    one_line_summary = oneline.extractOneLineSummary(summary)
-    abstractive_summary = abstractive.getAbstractiveSummary(summary, retention_percentage, no_of_sentences, word_count, default_retention_percentage)
-    return(summary, one_line_summary, abstractive_summary)
+
+
+"""Print Summary
+
+print("Summary:")
+lines = summary.split('.')
+for line in lines:
+  print(line)
+  """

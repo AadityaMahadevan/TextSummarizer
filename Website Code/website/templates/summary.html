@@ -1,11 +1,20 @@
 {% extends 'base.html' %}
 {% block content %}
 
+<!-- <script>
+  function copyToClipboard(x){
+    navigator.clipboard.writeText(x);
+    console.log("ok");
+  }
+
+</script> -->
 
 <div class="card w-75 mx-auto">
     <div class="card-body">
       <h5 class="card-title">Extractive Summary</h5>
       <p class="card-text">{{ extractive_summary }}</p>
+      <!-- <button onclick="copyToClipboard(extractive_summary)">Copy text</button> -->
+
     </div>
 </div>
 

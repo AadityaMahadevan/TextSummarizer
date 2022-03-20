@@ -5,6 +5,7 @@ from .AbstractiveSummarizer import get_abstractive_summary
 from pathlib import Path
 import string,os
 BASE_DIR = Path(__file__).resolve().parent.parent
+input_text = ""
 
 def generateInputText(input_type, file_name):
     #Get input text/Extract Transcripts

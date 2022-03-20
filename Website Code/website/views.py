@@ -31,7 +31,7 @@ def home(request):
 
 def upload(request):
     context={}
-    global CONTENT,FNAME
+    global CONTENT,FNAME,FTYPE
     print(request.POST)
     if request.method== 'POST' and "document" in request.POST:
         uploaded_file= request.FILES['document']

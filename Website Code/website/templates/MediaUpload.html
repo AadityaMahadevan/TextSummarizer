@@ -1,29 +1,47 @@
 {% extends 'base.html' %}
+{% load static %}
+
 {% block content %}
-<body>
-<h2>Upload your media file</h2>
-<div class="column">
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
+<link rel="stylesheet" href="{% static 'css/tstyle.css' %}" >  
 
-        <input type="file" name="media" accept=".mp3,.mp4,.mp4a">
-        <br>
-        <br>
-        <button type="submit" name="media">Upload</button>
-    </form>
-</div>
+    <br><br>
+    <div class="Cart-Container">
+        
+        <div>
 
-{% if file_content %}
-<p>Uploaded file preview:</p>
-<div style="overflow-y: scroll; height:300px; ">
-    "{{ file_content }}"
-
-</div>
+            <h2>Upload your media file</h2>
+            </div>
+            <div class="image-box">
+                <p> Accepted Formats : 
+                <img src="https://lh3.googleusercontent.com/tgaUz8i64rmo6OUaU-n5JBq1E32q4CYWDZXd0TIGHboBx2MEHpfi1Wj6TGHI3y0OdBmG" style: height="50px"/>
+                    <img src="https://play-lh.googleusercontent.com/nufRXPpDI9XP8mPdAvOoJULuBIH_OK4YbZZVu8i_-eDPulZpgb-Xp-EmI8Z53AlXHpqX" style: height="50px"/>
+                    <img src="https://cdn-icons-png.flaticon.com/512/180/180861.png" style: height="50px"/>
+                    <img src="https://cdn.iconscout.com/icon/premium/png-256-thumb/txt-file-482953.png" style: height="50px"/>
+                    <img src="https://www.computerhope.com/jargon/d/doc.png" style: height="50px"/>
+    </p>
+                    </div>
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                
+                        <input type="file" name="document" accept=".doc,.docx,.txt">
+                       
+                        <button type="button" class="btn btn-primary">Upload</button>
+                        
+                    </form>
+                    {% if file_content %}
+                    <br>
+    <p>Uploaded file preview:</p>
+    
+    <div style="overflow-y: scroll; height:300px; color: white; ">
+        "{{ file_content }}"
+    
+    </div>
 <br>
 <div class="column">
     <form method='get' action="summary">
         <p> Enter retention level: </p>
         <input type="number" name="retention">
+
         <button type='submit' name='retention' id='load'> Generate Summary </button>
     </form>
 </div>

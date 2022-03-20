@@ -1,0 +1,49 @@
+
+body { font-family: 'Open Sans';height: 200vh;display: flex;
+    justify-content: center;
+    align-items: center; font-size: 15px; font-weight: 400; background-color:rgb(196, 199, 230); line-height: 30px; text-align: center; }
+.Cart-Container{
+    width: 70%;
+    height: 80%;
+    background-color: #3c3163;
+    border-radius: 20px;
+    box-shadow: 0px 25px 40px #1687d933;
+   }
+strong { font-weight: 1000; }
+
+a { color: #856dc0; border-bottom: 1px dashed #856dc0; text-decoration: none; transition: all .3s; }
+a:hover, a:focus { color: #856dc0; border: 0; text-decoration: none; }
+p{color: wheat;}
+form{color: wheat;}
+
+
+h1, h2 { margin-top: 20px; font-size: 38px; font-weight: 700; color:wheat; line-height: 50px; font-style:oblique; }
+h3 { font-size: 22px; font-weight: 300; color: #555; line-height: 30px; font-style: italic; }
+
+img { max-width: 100%; }
+.image-box{
+    width: 100%;
+    text-align: center;
+    
+   }
+
+.medium-paragraph { font-size: 17px; line-height: 32px; }
+
+::-moz-selection { background: #7762ac; color: #fff; text-shadow: none; }
+::selection { background: #7762ac; color: #fff; text-shadow: none; }
+
+:root {
+  --color: #3c3163;
+  --transition-time: 0.5s;
+}
+
+* {
+  box-sizing: border-box;
+}
+/***** Divider *****/
+
+.divider-1 span { display: inline-block; width: 200px; border-bottom: 1px dotted #aaa; }
+
+
+
+

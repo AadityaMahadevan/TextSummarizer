@@ -13,19 +13,16 @@
             </div>
             <div class="image-box">
                 <p> Accepted Formats : 
-                <img src="https://lh3.googleusercontent.com/tgaUz8i64rmo6OUaU-n5JBq1E32q4CYWDZXd0TIGHboBx2MEHpfi1Wj6TGHI3y0OdBmG" style: height="50px"/>
-                    <img src="https://play-lh.googleusercontent.com/nufRXPpDI9XP8mPdAvOoJULuBIH_OK4YbZZVu8i_-eDPulZpgb-Xp-EmI8Z53AlXHpqX" style: height="50px"/>
-                    <img src="https://cdn-icons-png.flaticon.com/512/180/180861.png" style: height="50px"/>
-                    <img src="https://cdn.iconscout.com/icon/premium/png-256-thumb/txt-file-482953.png" style: height="50px"/>
-                    <img src="https://www.computerhope.com/jargon/d/doc.png" style: height="50px"/>
+                <img src="https://icons-for-free.com/iconfiles/png/512/eps+format+mp4+icon-1320167141674152346.png" style: height="50px"/>
+                    <img src="https://www.pngfind.com/pngs/m/417-4176066_mp3-icon-png-download-transparent-png.png" style: height="50px"/>
     </p>
                     </div>
                     <form method="post" enctype="multipart/form-data">
                         {% csrf_token %}
                 
-                        <input type="file" name="document" accept=".doc,.docx,.txt">
+                        <input type="file" name="media" accept=".mp4,.mp3,.mp4a">
                        
-                        <button type="button" class="btn btn-primary">Upload</button>
+                        <button type="submit" name = media class="btn btn-primary">Upload</button>
                         
                     </form>
                     {% if file_content %}

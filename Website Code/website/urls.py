@@ -13,6 +13,8 @@ urlpatterns = [
     path('TextUpload/',include(extra_patterns)),
     path('MediaUpload/',views.mediaUpload,name="MediaUpload"),
     path('MediaUpload/',include(extra_patterns)),
+    path('MediaUpload1/',views.mediaUpload,name="MediaUpload1"),
+    path('MediaUpload1/',include(extra_patterns)),
     path('accounts/login',views.login,name='login'),
 
 

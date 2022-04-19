@@ -45,7 +45,7 @@
   </div>-->
   <section class="cards-wrapper">
     <div class="card-grid-space">
-      <a class="card" href="{% url 'MediaUpload' %}" style="--bg-img: url(https://media3.giphy.com/media/TEILCythSScYyaaEDK/giphy.gif)">
+      <a class="card" href="{% url 'mediaUpload' %}" style="--bg-img: url(https://media3.giphy.com/media/TEILCythSScYyaaEDK/giphy.gif)">
         <div>
           <h1>Minutes of the Meeting</h1><br><br><br><br><br>
           <p>Upload the meeting recording and automatically generate meeting notes.</p>
@@ -57,7 +57,9 @@
       </a>
     </div>
     <div class="card-grid-space">
-      <a class="card" href="{% url 'TextUpload' %}" style="--bg-img: url(https://www.suntec.ai/img/extractive-text-summarization.jpg)">
+      <a class="card" href="{% url 'textUpload' %}" style="--bg-img: url(https://www.suntec.ai/img/extractive-text-summarization.jpg)">
+
+      <!-- <a class="card" href="{% url 'textUpload' %}" style="--bg-img: url(https://www.suntec.ai/img/extractive-text-summarization.jpg)"> -->
         <div>
           <h1>Document Summarization</h1><br><br><br><br><br>
           <p>Too much of a long document to read.. Have no worries ! Upload and read the summary.</p>

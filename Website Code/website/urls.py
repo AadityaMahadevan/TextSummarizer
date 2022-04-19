@@ -18,6 +18,11 @@ urlpatterns = [
     path('accounts/login',views.login,name='login'),
 
 
+    path('textUpload/',views.textUpload,name="textUpload"),
+    path('mediaUpload/',views.mediaUpload,name="mediaUpload")
+
+
+
     
 ]
 

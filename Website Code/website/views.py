@@ -8,6 +8,8 @@ from .Summarizerpythonfiles import ExtractiveSummarizer as extractive
 from .Summarizerpythonfiles import AbstractiveSummarizer as abstractive
 from .Summarizerpythonfiles import HybridSummarizer as hybrid
 from .Summarizerpythonfiles import SpeechToText as stt
+from django.contrib import messages
+
 
 
 import urllib
@@ -29,7 +31,7 @@ FTYPE=''
 def home(request):
     return render(request, 'home.html')
 
-def upload(request):
+def textUpload(request):
     context={}
     global CONTENT,FNAME,FTYPE
     print(request.POST)
@@ -41,12 +43,13 @@ def upload(request):
         fs= FileSystemStorage(location='website/media/documents/')
         file_name=fs.save(uploaded_file.name, uploaded_file)
         
+        
         file_content=open(os.path.join(BASE_DIR,'media\\documents',file_name),"r",encoding="utf-8").read()
         print("\n"+file_content)
         context['file_content']=file_content
-        CONTENT=file_content
+        CONTENT=file_content   
 
-    return render(request, 'TextUpload.html',context)
+    return render(request, 'upload-preview-transcripts/mediaUpload.html',context)
 
 def mediaUpload(request):
     context={}
@@ -57,25 +60,72 @@ def mediaUpload(request):
         print(uploaded_file.name)
         fs= FileSystemStorage(location='website/media/AV/')
         file_name=fs.save(uploaded_file.name, uploaded_file)
+        FNAME=file_name
+
+        if file_name.endswith('.mp3'):
+            FTYPE='audio'
+        else:
+            FTYPE='video'
+
+        context['file_type']=FTYPE
+        context['file_name']=FNAME
+    return render(request, 'upload-preview-transcripts/mediaUpload.html',context)
+    
+
+
+def upload(request):
+    context={}
+    global CONTENT,FNAME,FTYPE
+    print(request.POST)
+    if request.method== 'POST' and "document" in request.POST:
+        uploaded_file= request.FILES['document']
+        print(uploaded_file.name)
         FNAME=uploaded_file.name
+        FTYPE='text'
+        fs= FileSystemStorage(location='website/media/documents/')
+        file_name=fs.save(uploaded_file.name, uploaded_file)
+        context['message']="File Uploaded Successfully"
 
-        FTYPE='audio'
         
-        #file_content=open(os.path.join(BASE_DIR,'media/AV',file_name),"r",encoding="utf-8").read()
-        # print("\n"+file_content)
-
-        #####################################################
-        ######### ADD ASR MODULE REDIRECT HERE#############
-        #################################################
-        ### BELOW 3 LINES ARE PLACEHOLDERS###########3
-        # file_content=open(os.path.join(BASE_DIR,'media\\AV',file_name),"r",encoding='latin-1').read()
-        # print("\n"+file_content)  
-        file_content=stt.get_transcripts(FNAME)
-
+        file_content=open(os.path.join(BASE_DIR,'media\\documents',file_name),"r",encoding="utf-8").read()
+        print("\n"+file_content)
         context['file_content']=file_content
         CONTENT=file_content
+        
 
-    return render(request, 'MediaUpload.html',context)
+    return render(request, 'TextUpload.html',context)
+
+
+
+
+# def mediaUpload(request):
+#     context={}
+#     global CONTENT,FTYPE,FNAME
+#     print(request.POST)
+#     if request.method== 'POST' and "media" in request.POST:
+#         uploaded_file= request.FILES['media']
+#         print(uploaded_file.name)
+#         fs= FileSystemStorage(location='website/media/AV/')
+#         file_name=fs.save(uploaded_file.name, uploaded_file)
+#         FNAME=uploaded_file.name
+
+#         FTYPE='audio'
+        
+#         #file_content=open(os.path.join(BASE_DIR,'media/AV',file_name),"r",encoding="utf-8").read()
+#         # print("\n"+file_content)
+
+#         #####################################################
+#         ######### ADD ASR MODULE REDIRECT HERE#############
+#         #################################################
+#         ### BELOW 3 LINES ARE PLACEHOLDERS###########3
+#         # file_content=open(os.path.join(BASE_DIR,'media\\AV',file_name),"r",encoding='latin-1').read()
+#         # print("\n"+file_content)  
+#         file_content=stt.get_transcripts(FNAME)
+
+#         context['file_content']=file_content
+#         CONTENT=file_content
+
+#     return render(request, 'MediaUpload.html',context)
 
     
 def login(request):

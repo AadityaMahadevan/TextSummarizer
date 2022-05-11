@@ -1,8 +1,7 @@
 from SpeechToText import get_transcripts
 from OneLineSummaryT5 import get_one_line_summary
 from ExtractiveSummarizerCentroid import get_extractive_summary
-from FineTunedBARTSummarizer import get_abstractive_summary
-# from AbstractiveSummarizer import get_abstractive_summary
+from FineTunedBARTSummarizertorch import get_abstractive_summary
 import string
 
 
@@ -31,10 +30,10 @@ def generateExtractiveSummary(input_type, input_text):
     #For Summarization
     minimum_word_count = 50
     retention_percent = 60
-    word_limit = 256
+    word_limit = 300
 
     #For note-taking
-    sentence_limit = 5
+    sentence_limit = 5 #PLEASE TUNE IT
     #Type
     limit_type = 'word' #'sentence' or 'word' or 'retention_percentage'
     input_type = 'text' #'audio', 'video or 'text'
@@ -69,12 +68,10 @@ def generateOneLineSummary(input_text, extractive_summary):
 
 def generateAbstractiveSummary(extractive_summary):
     """ Parameters for extractive summarization"""
-    # model_checkpoint_name = 'facebook/bart-base'
-    # checkpoint_path = 'summarizer-checkpoint-bart-base-new.h5'
-    model_checkpoint_name = 'facebook/bart-large-cnn'
-    checkpoint_path = 'summarizer-checkpoint-bart-large.h5'
+    model_checkpoint_name = 'ainize/bart-base-cnn'
+    checkpoint_path = 'torch-bart-base-cnn-finetuned-FINAL.pth'
     """Get Abstractive Summary"""
-    abstractive_summary =  get_abstractive_summary(extractive_summary, checkpoint_path, model_checkpoint_name, 512)
+    abstractive_summary =  get_abstractive_summary(extractive_summary, checkpoint_path, model_checkpoint_name)
     return abstractive_summary
 
 file_name = 'inputtext.txt'

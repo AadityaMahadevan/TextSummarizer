@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/tstyle.css' %}" >  
+
+    <br><br>
+
+
+<br>
+<div style="overflow-y: scroll; height:300px; color: white; ">
+    "{{ input_text }}"
+
+<div class="column">
+    <p>No. of sentences in input_text: {{ text_sen }}</p>
+    <form method='get' action="gen_notes">
+        <p> Enter number of sentences required in summary():  </p>
+        <input type="number" name="nos">
+        <button type="submit" name = "nos" id = "load" class="btn btn-primary">Generate Notes</button>
+       
+    </form>
+</div>
+<div style="overflow-y: scroll;" class="card w-75 mx-auto ">
+    <div class="card-body">
+      <h5 style="color: black;" class="card-title">Notes</h5>
+      <p style="color: black;" class="card-text">{{ notes }}</p>
+     <!-- <button onclick="copyToClipboard(extractive_summary)">Copy text</button> -->
+
+    </div>
+</div>
+
+
+    </div>
+
+
+<!-- <script>
+    $('load').click(function () {
+        $('body').append('<div style="" id="loadingDiv"><div class="loader">Loading...</div></div>');
+        $(window).on('load', function () {
+            setTimeout(removeLoader, 2000); //wait for page load PLUS two seconds.
+        });
+        function removeLoader() {
+            $("#loadingDiv").fadeOut(500, function () {
+                // fadeOut complete. Remove the loading div
+                $("#loadingDiv").remove(); //makes page more lightweight 
+            });
+        }
+    });
+
+</script> -->
+
+</body>
+
+
+{% endblock %}

@@ -8,6 +8,7 @@ from .Summarizerpythonfiles import ExtractiveSummarizer as extractive
 from .Summarizerpythonfiles import AbstractiveSummarizer as abstractive
 from .Summarizerpythonfiles import HybridSummarizer as hybrid
 from .Summarizerpythonfiles import SpeechToText as stt
+from .Summarizerpythonfiles import ExtractiveSummarizerCentroid as extractivenew
 
 
 import urllib
@@ -101,4 +102,34 @@ def summary(request):
         print("Abstractive Summary: ", abstractive_summary)
 
     return render(request, 'summary.html',context)
+
+def notes(request):
+    context={}
+    global CONTENT,FNAME,FTYPE
+    input_text,text_sen,text_words = extractivenew.input_txt_length(FTYPE,FNAME)
+    context['text_sen'] = text_sen
+    context['text_words'] = text_words 
+    context['input_text'] = input_text 
+    print("Text sentences", text_sen) 
+    return render(request, 'notes.html',context)
+
+def gen_notes(request):
+    global CONTENT,FNAME,FTYPE
+    print(request.GET)
+    if request.method=='GET' and "nos" in request.GET:
+        context={}
+        nos=int(request.GET.getlist("nos")[0])
+        print(nos)
+        notes, text_word_count, text_sent_count, summ_sent_count, summ_word_count = extractivenew.get_extractive_summary(FTYPE, FNAME, 'sentence', nos)
+        context['notes']= notes
+        context['text_word_count']= text_word_count
+        context['text_sent_count']= text_sent_count
+        context['summ_sent_count'] = summ_sent_count
+        context['summ_word_count'] = summ_word_count
+        print("Extractive Summary: ", notes)
+        print("Text words: ", text_word_count)
+        print("Text sentences: ", text_sent_count)
+        print("Summ sentences: ", summ_sent_count)
+        print("Summ words: ", summ_word_count)
+    return render(request, 'notes.html',context)    
         

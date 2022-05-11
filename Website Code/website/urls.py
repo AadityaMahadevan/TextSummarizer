@@ -3,6 +3,8 @@ from . import views
 
 extra_patterns=[
     path('summary/',views.summary,name="summary"),
+    path('notes/',views.notes,name="notes"),
+    path('gen_notes/',views.gen_notes,name="gen_notes"),
 
 ]
 urlpatterns = [
@@ -16,6 +18,8 @@ urlpatterns = [
     path('MediaUpload1/',views.mediaUpload,name="MediaUpload1"),
     path('MediaUpload1/',include(extra_patterns)),
     path('accounts/login',views.login,name='login'),
+    path('TextUpload/notes/',views.notes,name="notes"),
+    path('TextUpload/notes/',include(extra_patterns)),
 
 
     

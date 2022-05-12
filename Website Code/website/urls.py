@@ -17,7 +17,12 @@ urlpatterns = [
     path('MediaUpload/',views.mediaUpload,name="MediaUpload"),
     path('MediaUpload/',include(extra_patterns)),
     # path('transcripts/',include(extra_patterns)),
+
     path('accounts/login',views.login,name='login'),
+    
+    path('accounts/login/verification/',views.phone_verification, name='phone_verification'),
+    path('verification/token/',views.token_validation, name='token_validation'),
+    path('verified/',views.verified, name='verified'),  
 
     path('textUpload/',views.textUpload,name="textUpload"),
     path('textUpload/',include(extra_patterns)),

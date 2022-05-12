@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/tstyle.css' %}" >  
+
+    <br><br>
+    <div class="Cart-Container">
+        
+        <div>
+
+            <h2>Upload your media file</h2>
+            </div>
+            <div class="image-box">
+                <p> Accepted Formats : 
+                <img src="https://icons-for-free.com/iconfiles/png/512/eps+format+mp4+icon-1320167141674152346.png" style: height="50px"/>
+                    <img src="https://www.pngfind.com/pngs/m/417-4176066_mp3-icon-png-download-transparent-png.png" style: height="50px"/>
+    </p>
+                    </div>
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                
+                        <input type="file" name="media" accept=".mp4,.mp3,.mp4a">
+                       
+                        <button type="submit" name = media class="btn btn-primary">Upload</button>
+                        
+                    </form>
+                    {% if file_content %}
+                    <br>
+    <p>Uploaded file preview:</p>
+    
+    <div style="overflow-y: scroll; height:300px; color: white; ">
+        "{{ file_content }}"
+    
+    </div>
+<br>
+
+<!-- <script>
+    $('load').click(function () {
+        $('body').append('<div style="" id="loadingDiv"><div class="loader">Loading...</div></div>');
+        $(window).on('load', function () {
+            setTimeout(removeLoader, 2000); //wait for page load PLUS two seconds.
+        });
+        function removeLoader() {
+            $("#loadingDiv").fadeOut(500, function () {
+                // fadeOut complete. Remove the loading div
+                $("#loadingDiv").remove(); //makes page more lightweight 
+            });
+        }
+    });
+
+</script> -->
+
+</body>
+{% endif %}
+
+{% endblock %}

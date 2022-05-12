@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'hstyle.css' %}" >  
+<div style="background-image: url('https://today.umd.edu/uploads/hero/ZoomBombing3_1920x1080.gif'); 
+  				background-size: cover; height:480px; padding-top:80px;">
+ <!-- Top content -->
+ <div class="top-content">	
+  <div class="inner-bg">
+      <div class="container">                	
+          <div class="row">
+              <div class="col-md-8 offset-md-2 text">
+                  <h2 class="wow fadeInLeftBig">Minutes</h2>
+                  <div class="description wow fadeInUp">
+                    <p>
+                      Generate meeting notes, summarize text documents on the go!
+                    </p>
+                  </div>
+              </div>
+          </div>
+          
+      </div>
+  </div>
+  
+</div>
+</div>
+
+
+ <!-- <h1> Upload your file as a document or audio/video</h1>
+  <div class="card" style="width: 18rem;">
+    <div class="card-body">
+      <h5 class="card-title">Upload document file</h5>
+      <p class="card-text">Accepted extensions: .doc, .docx, .txt, .odt, .pdf</p>
+      <a href="{% url 'TextUpload' %}" class="btn btn-primary">Upload</a>
+    </div>
+  </div>
+  <h2>OR</h2>
+  <div class="card" style="width: 18rem;">
+    <div class="card-body">
+      <h5 class="card-title">Upload media file</h5>
+      <p class="card-text">Accepted extensions: .mp3, .mp4, .mp4a</p>
+      <a href="{% url 'MediaUpload' %}" class="btn btn-primary">Upload</a>
+    </div>
+  </div>-->
+  <section class="cards-wrapper">
+    <div class="card-grid-space">
+      <a class="card" href="{% url 'mediaUpload' %}" style="--bg-img: url(https://media3.giphy.com/media/TEILCythSScYyaaEDK/giphy.gif)">
+        <div>
+          <h1>Minutes of the Meeting</h1><br><br><br><br><br>
+          <p>Upload the meeting recording and automatically generate meeting notes.</p>
+          <i class='fa fa-arrow-circle-right fa-xl' style='color:#c4c7e6'></i>
+          <div class="tags">
+           
+          </div>
+        </div>
+      </a>
+    </div>
+    <div class="card-grid-space">
+      <a class="card" href="{% url 'textUpload' %}" style="--bg-img: url(https://www.suntec.ai/img/extractive-text-summarization.jpg)">
+
+      <!-- <a class="card" href="{% url 'textUpload' %}" style="--bg-img: url(https://www.suntec.ai/img/extractive-text-summarization.jpg)"> -->
+        <div>
+          <h1>Document Summarization</h1><br><br><br><br><br>
+          <p>Too much of a long document to read.. Have no worries ! Upload and read the summary.</p>
+          
+          <i class='fa fa-arrow-circle-right fa-xl' style='color:#c4c7e6'></i>
+          <div class="tags">
+  
+          </div>
+        </div>
+      </a>
+  </div>
+      <div class="card-grid-space">
+          <a class="card" href="{% url 'transcriptsPreview' %}" style="--bg-img: url(https://thumbs.dreamstime.com/b/speech-to-text-illustration-concept-websites-landing-pages-mobile-applications-posters-banners-209276669.jpg)">
+            <div>
+              <h1>Audio Transcription</h1><br><br><br><br><br>
+              
+              <p>Can't listen to an audio clip right now! Upload any audio file and generate the transcripts.</p>
+              <i class='fa fa-arrow-circle-right fa-xl' style='color:#c4c7e6'></i>
+              <div class="tags">
+  
+              </div>
+            </div>
+          </a>
+        </div>
+  </section>
+     
+          <!-- Javascript -->
+          <script src="assets/js/jquery-3.2.1.min.js"></script>
+          <script src="assets/js/jquery-migrate-3.0.0.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+          <script src="assets/js/jquery.backstretch.min.js"></script>
+          <script src="assets/js/wow.min.js"></script>
+          <script src="assets/js/retina-1.1.0.min.js"></script>
+          <script src="assets/js/waypoints.min.js"></script>
+          <script src="assets/js/scripts.js"></script>
+  
+
+{% endblock %}

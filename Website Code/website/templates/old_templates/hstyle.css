@@ -1,0 +1,181 @@
+
+body { font-family: 'Open Sans', sans-serif; font-size: 15px; font-weight: 400; color: #888; line-height: 30px; text-align: center; }
+
+strong { font-weight: 1000; }
+
+a { color: #856dc0; border-bottom: 1px dashed #856dc0; text-decoration: none; transition: all .3s; }
+a:hover, a:focus { color: #856dc0; border: 0; text-decoration: none; }
+
+h1, h2 { margin-top: 10px; font-size: 38px; font-weight: 300; color: #555; line-height: 50px; font-style: italic; }
+h3 { font-size: 22px; font-weight: 300; color: #555; line-height: 30px; font-style: italic; }
+
+img { max-width: 100%; }
+
+.medium-paragraph { font-size: 17px; line-height: 32px; }
+
+::-moz-selection { background: #7762ac; color: #fff; text-shadow: none; }
+::selection { background: #7762ac; color: #fff; text-shadow: none; }
+
+
+
+:root {
+  --color: #3c3163;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: 'Open Sans';
+  background: #5c517a;
+}
+
+a {
+  color: inherit;
+}
+
+.cards-wrapper {
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  grid-template-columns: auto auto auto ;
+  grid-gap: 4rem;
+  padding: 4rem;
+  margin: 0 auto;
+  width: max-content;
+}
+
+.card {
+  font-family: 'Lucida-sans';
+  
+  background-image: linear-gradient(rgba(0,0,0,var(--bg-filter-opacity)),rgba(0,0,0,var(--bg-filter-opacity))), var(--bg-img);
+  height: 20em;
+  width: 15em;
+  font-size: 1.5em;
+  color: white;
+  border-radius: 1em;
+  padding: 1em;
+  display: flex;
+  align-items: flex-end;
+  background-size: cover;
+  background-position: center;
+  box-shadow: 0 0 5em -1em black;
+  transition: all, var(--transition-time);
+  position: relative;
+  overflow: hidden;
+  border: 10px solid rgb(196, 199, 230);
+  text-decoration: none;
+}
+
+
+
+.card h1 {
+  margin: 0;
+  font-size: 1.5em;
+  line-height: 1.2em;
+  color : rgb(32, 32, 95);
+}
+
+.card p {
+  font-size: 0.75em;
+  font-family: 'Open Sans';
+  margin-top: 0.5em;
+  line-height: 2em;
+}
+
+.card-grid-space .num {
+  font-size: 3em;
+  margin-bottom: 1.2rem;
+  margin-left: 1rem;
+}
+
+/* MEDIA QUERIES */
+@media screen and (max-width: 1285px) {
+  .cards-wrapper {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .cards-wrapper {
+    grid-template-columns: 1fr;
+  }
+  .info {
+    justify-content: center;
+  }
+
+}
+
+@media screen and (max-width: 500px) {
+  .cards-wrapper {
+    padding: 4rem 2rem;
+  }
+  .card {
+    max-width: calc(100vw - 4rem);
+  }
+}
+
+/***** General style, all sections *****/
+
+.section-container { margin: 0 auto; padding-bottom: 80px; }
+
+.section-container-gray-bg { background: #f8f8f8; }
+
+.section-container-image-bg, 
+.section-container-image-bg h2, 
+.section-container-image-bg h3 { color: #fff; }
+
+.section-container-image-bg .divider-1 span { border-color: #fff; }
+
+.section-description { margin-top: 60px; padding-bottom: 10px; }
+
+.section-description p { margin-top: 20px; padding: 0 120px; }
+.section-container-image-bg .section-description p { opacity: 0.8; }
+
+.section-bottom-button { padding-top: 60px; }
+
+
+/***** Divider *****/
+
+.divider-1 span { display: inline-block; width: 200px; border-bottom: 1px dotted #aaa; }
+
+
+/***** Top menu *****/
+
+.navbar {
+	background: rgb(4, 4, 7);
+	-o-transition: all .6s; -moz-transition: all .6s; -webkit-transition: all .6s; -ms-transition: all .6s; transition: all .6s;
+	backface-visibility: hidden;
+}
+.navbar.navbar-no-bg { background: #444; background: rgba(0, 0, 0, 0.2); }
+
+.navbar-dark .navbar-nav { font-size: 15px; color: rgb(32, 32, 95); text-transform: uppercase; }
+.navbar-dark .navbar-nav .nav-link { color: #fff; color: rgb(32,32,95); border: 0; }
+.navbar-dark .navbar-nav .nav-link:hover { color: #fff; }
+.navbar-dark .navbar-nav .nav-link:focus { color: #fff; outline: 0; }
+
+.navbar-expand-md .navbar-nav .nav-link { padding-left: 1rem; padding-right: 1rem; }
+
+.navbar-brand {
+	font-size: 15px;
+	color: rgb(32, 32,95);
+	text-transform: uppercase;
+}
+
+
+/***** Top content *****/
+
+.inner-bg { padding: 5px 0; }
+
+.top-content .text { color: rgb(32,32,95); }
+.top-content .text h2 { margin-top: 1px; color:rgb(32,32,95); font-weight: bolder; font-family: 'Lucida Sans';}
+.top-content .description { margin: 10px 0 10px 0; }
+.top-content .description p { opacity: 0.8; }
+
+/***** Footer *****/
+
+footer { padding: 40px 0; }
+

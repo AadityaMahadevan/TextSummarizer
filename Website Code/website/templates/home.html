@@ -2,100 +2,94 @@
 {% block content %}
 {% load static %}
 
-<link rel="stylesheet" href="{% static 'hstyle.css' %}" >  
-<div style="background-image: url('https://today.umd.edu/uploads/hero/ZoomBombing3_1920x1080.gif'); 
-  				background-size: cover; height:480px; padding-top:80px;">
- <!-- Top content -->
- <div class="top-content">	
-  <div class="inner-bg">
-      <div class="container">                	
-          <div class="row">
-              <div class="col-md-8 offset-md-2 text">
-                  <h2 class="wow fadeInLeftBig">Minutes</h2>
-                  <div class="description wow fadeInUp">
-                    <p>
-                      Generate meeting notes, summarize text documents on the go!
-                    </p>
-                  </div>
-              </div>
-          </div>
-          
-      </div>
-  </div>
-  
-</div>
-</div>
-
-
- <!-- <h1> Upload your file as a document or audio/video</h1>
-  <div class="card" style="width: 18rem;">
-    <div class="card-body">
-      <h5 class="card-title">Upload document file</h5>
-      <p class="card-text">Accepted extensions: .doc, .docx, .txt, .odt, .pdf</p>
-      <a href="{% url 'TextUpload' %}" class="btn btn-primary">Upload</a>
-    </div>
-  </div>
-  <h2>OR</h2>
-  <div class="card" style="width: 18rem;">
-    <div class="card-body">
-      <h5 class="card-title">Upload media file</h5>
-      <p class="card-text">Accepted extensions: .mp3, .mp4, .mp4a</p>
-      <a href="{% url 'MediaUpload' %}" class="btn btn-primary">Upload</a>
-    </div>
-  </div>-->
-  <section class="cards-wrapper">
-    <div class="card-grid-space">
-      <a class="card" href="{% url 'mediaUpload' %}" style="--bg-img: url(https://media3.giphy.com/media/TEILCythSScYyaaEDK/giphy.gif)">
-        <div>
-          <h1>Minutes of the Meeting</h1><br><br><br><br><br>
-          <p>Upload the meeting recording and automatically generate meeting notes.</p>
-          <i class='fa fa-arrow-circle-right fa-xl' style='color:#c4c7e6'></i>
-          <div class="tags">
-           
-          </div>
-        </div>
-      </a>
-    </div>
-    <div class="card-grid-space">
-      <a class="card" href="{% url 'textUpload' %}" style="--bg-img: url(https://www.suntec.ai/img/extractive-text-summarization.jpg)">
-
-      <!-- <a class="card" href="{% url 'textUpload' %}" style="--bg-img: url(https://www.suntec.ai/img/extractive-text-summarization.jpg)"> -->
-        <div>
-          <h1>Document Summarization</h1><br><br><br><br><br>
-          <p>Too much of a long document to read.. Have no worries ! Upload and read the summary.</p>
-          
-          <i class='fa fa-arrow-circle-right fa-xl' style='color:#c4c7e6'></i>
-          <div class="tags">
-  
-          </div>
-        </div>
-      </a>
-  </div>
-      <div class="card-grid-space">
-          <a class="card" href="{% url 'transcriptsPreview' %}" style="--bg-img: url(https://thumbs.dreamstime.com/b/speech-to-text-illustration-concept-websites-landing-pages-mobile-applications-posters-banners-209276669.jpg)">
-            <div>
-              <h1>Audio Transcription</h1><br><br><br><br><br>
-              
-              <p>Can't listen to an audio clip right now! Upload any audio file and generate the transcripts.</p>
-              <i class='fa fa-arrow-circle-right fa-xl' style='color:#c4c7e6'></i>
-              <div class="tags">
-  
-              </div>
-            </div>
-          </a>
-        </div>
+<!--<link rel="stylesheet" href="{% static 'hstyle.css' %}" >  -->
+<main class="container">
+  <section class="hero container">
+    <h1 class="hero-title-primary">Minutes</h1>
+    <p class="hero-title-sub">Text Summarizer for Online Meetings, Lectures & Presentations</p>
   </section>
-     
-          <!-- Javascript -->
-          <script src="assets/js/jquery-3.2.1.min.js"></script>
-          <script src="assets/js/jquery-migrate-3.0.0.min.js"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-          <script src="assets/js/jquery.backstretch.min.js"></script>
-          <script src="assets/js/wow.min.js"></script>
-          <script src="assets/js/retina-1.1.0.min.js"></script>
-          <script src="assets/js/waypoints.min.js"></script>
-          <script src="assets/js/scripts.js"></script>
-  
+  <div class="hero-image">
+    <img src = "https://media3.giphy.com/media/TEILCythSScYyaaEDK/giphy.gif" style="width: 600px; height: 550px;">
+  </div>
+
+</main>
+<!--Waves Container-->
+<!-- CSS Waves from goodkatz (https://codepen.io/goodkatz/pen/LYPGxQz) -->
+<div>
+  <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+<defs>
+<path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+</defs>
+<g class="parallax">
+<use xlink:href="#gentle-wave" x="48" y="0" fill="rgba(255,255,255,0.7" />
+<use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(255,255,255,0.5)" />
+<use xlink:href="#gentle-wave" x="48" y="5" fill="rgba(255,255,255,0.3)" />
+<use xlink:href="#gentle-wave" x="48" y="7" fill="#fff" />
+</g>
+</svg>
+</div>
+<!--Waves end-->
+<!--Header ends-->
+<section class="video-content">
+  <div class="video-story">
+    <h1 class="video-title">Features</h1>
+  </div>
+  <div class="three-dots">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+
+</section>
+
+<div class="inner-content">
+  <div class="row">
+  <div class="mb-30 col-md-6 col-lg-4">
+    <div class="card">
+    <img class="card-icon" src="https://www.amberscript.com/wp-content/uploads/2021/04/audio-video-icon-480x480.png" alt="monitoring" >
+    <h3 class="card-title">Summarize Audio/Video Files</h3>
+    <p class="card-text">Upload and Summarize any audio/video meeting recordings and automatically generate MoMs (Minutes of Meeting). Easy to use, and even saves time.
+    </p>
+    <a class="card-link" href="#">Learn more</a>
+    </div>
+  </div>
+  <div class="mb-30 col-md-6 col-lg-4">
+    <div class="card">
+    <img class="card-icon" src="https://cdn.allthings.how/wp-content/uploads/2021/08/allthings.how-how-to-enable-transcription-in-microsoft-teams-live-transcribe-759x427.png?width=800" alt="monitoring" >
+    <h3 class="card-title">Audio Transcription</h3>
+    <br>
+    <p class="card-text">Perfect for voice notes that you can't listen right away, transcripts let you easily convert them to readable format which can easily be downloaded in any type of file you prefer.</p>
+    <a class="card-link" href="#">Learn more</a>
+    </div>
+  </div>
+  <div class="mb-30 col-md-6 col-lg-4">
+    <div class="card">
+    <img class="card-icon" src="https://clickup.com/blog/wp-content/uploads/2020/01/note-taking.png" alt="team management" >
+    <h3 class="card-title">Note-Making</h3>
+    <br>
+    <p class="card-text">With Automated Note-Making you can easily generate notes in a pointwise format. You can even specify the number of points you want.</p>
+    <a class="card-link" href="#">Learn more</a>
+    </div>
+  </div>
+  <div class="mb-30 col-md-6 col-lg-4">
+    <div class="card">
+    <img class="card-icon" src="https://icon-library.com/images/summarize-icon/summarize-icon-9.jpg" alt="monitoring" >
+    <h3 class="card-title">Summarize Documents</h3>
+    <p class="card-text">Have a document that is too long to read? Minutes Summarizer helps you shorten it. Just upload the text document, enter the retention level you wish and we will give you a short summary with a title as well.</p>
+    <a class="card-link" href="#">Learn more</a>
+    </div>
+  </div>
+  <div class="mb-30 col-md-6 col-lg-4">
+    <div class="card">
+    <img class="card-icon" src="https://us.123rf.com/450wm/bsd555/bsd5552003/bsd555200302800/143157055-transcription-blue-rgb-color-icon-linguist-translator-listening-and-translation-foreign-language-rep.jpg?ver=6" alt="snapshots" >
+    <h3 class="card-title">Record & Summarize</h3>
+    <p class="card-text">This feature lets you record an audio input and summarize it's content.Just press the recording icon, start speaking and Minutes will automatically generate the summary out of it.</p>
+    <a class="card-link" href="#">Learn more</a>
+    </div>
+  </div>
+</div>
+</div>
+
+</section>
 
 {% endblock %}

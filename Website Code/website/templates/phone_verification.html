@@ -1,0 +1,56 @@
+{% extends 'loginbase.html' %}
+{% block content %}
+{% load static %}
+{% load i18n %}
+{% load account socialaccount %}
+{% load crispy_forms_filters %}
+
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/16.0.11/css/intlTelInput.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/16.0.11/js/intlTelInput.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<div class="row centered-form">
+
+    <div class="panel panel-default" >
+      <div class="panel-heading" style="color: white; background-color: #3c1361;"  >
+        <h3 class="panel-title">Phone Verification</h3>
+      </div>
+      <div class="panel-body" >
+        <form role="form" method="POST">
+          {% csrf_token %}
+
+          {{ form.non_field_errors }}
+          {{ form.phone_number.errors }}
+          {{ form.via.errors }}
+
+          <div class="row">
+
+            <input type="tel" id="intl_phone_number" class="form-control" style="width: auto;"/>
+            {{ form.via }}
+          </div>
+          <input type="submit" value="Send OTP" class="btn btn-warning ">
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>
+<script>
+    const phoneInputField = document.querySelector("#intl_phone_number");
+    const phoneInput = window.intlTelInput(phoneInputField, {
+       initialCountry: "auto",
+       geoIpLookup: function(callback) {
+    $.get('https://ipinfo.io', function() {}, "jsonp").always(function(resp) {
+      var countryCode = (resp && resp.country) ? resp.country : "us";
+      callback(countryCode);
+    });
+  },
+        separateDialCode: true,
+        hiddenInput: "phone_number",
+        utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/16.0.11/js/utils.js"
+        });
+</script>
+{% endblock %}
+
+
+  

@@ -110,8 +110,14 @@ http://www.templatemo.com/tm-498-stimulus
                                         "{{ file_content }}"
 
                                    </div>
-                                   
-                                   <button type="submit" name = "retention" id = "load" class="wow fadeInUp smoothScroll section-btn btn btn-success">Generate Summary</button>
+
+                                   <form method="post" action="summary">      
+                                        {% csrf_token %}                                 
+
+                                        <button type="submit" name="summary"
+                                             class="wow fadeInUp smoothScroll section-btn btn btn-success">Generate Summary</button>
+
+                                   </form>                                  
                                        
                               </div>
                          </div>

@@ -230,6 +230,7 @@ a:hover, a:active, a:focus {
   z-index: 99999;
   display: flex;
   flex-flow: row nowrap;
+  
   justify-content: center;
   align-items: center;
   background: none repeat scroll 0 0 #ffffff;
@@ -356,7 +357,7 @@ a:hover, a:active, a:focus {
 }
 
 #home .home-img {
-  background: url('/images/home-img.jpg') no-repeat;
+  background: url('/static/images/home-img.jpg') no-repeat;
   background-size: cover;
   background-position: 50% 50%;
   width: 100%;

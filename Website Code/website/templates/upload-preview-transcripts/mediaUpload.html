@@ -13,7 +13,7 @@
      <meta name="author" content="templatemo">
      <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-     <title>Upload Document</title>
+     <title>Upload Media</title>
      <!--
 Stimulus Template
 http://www.templatemo.com/tm-498-stimulus
@@ -74,6 +74,16 @@ http://www.templatemo.com/tm-498-stimulus
                          <div class="home-thumb">
                               <div class="section-title">
                                    <!-- <h4 class="wow fadeInUp" data-wow-delay="0.3s">welcome to my website</h4> -->
+                                   <h1 class="wow fadeInUp" data-wow-delay="0.6s">Record</h1>
+                                   <span><a id="download" style="display: none;"><button type="button"
+                                                  class="btn btn-primary mb-4"> Download</button></a></span>
+                                   <button type="button" class="btn btn-danger" id="stopRecord" disabled>Stop</button>
+                                   <button type="button" onclick="recordAudio()" class="btn btn-info">Start
+                                        Recording</button>
+                                   <!-- <button type="button" onclick="recordVideo()" class="btn btn-info">Record Video</button>
+                                   <button type="button" onclick="recordScreen()" class="btn btn-info">Record Screen</button> -->
+
+
                                    <h1 class="wow fadeInUp" data-wow-delay="0.6s">Upload your media file</h1>
                                    <p class="wow fadeInUp" data-wow-delay="0.9s">Accepted formats include .mp3, .mp4
                                    </p>
@@ -106,6 +116,7 @@ http://www.templatemo.com/tm-498-stimulus
                                    <h1 class="wow fadeInUp" data-wow-delay="0.6s">Uploaded File Preview</h1>
 
                                    {% if file_typ == "audio" %}
+                                   <!-- If audio file -->
 
                                    <div class="wow fadeInUp" data-wow-delay="0.2s"
                                         style="height:300px; color: rgb(9, 0, 0); ">
@@ -118,6 +129,7 @@ http://www.templatemo.com/tm-498-stimulus
                                    </div>
 
                                    {% else %}
+                                   <!-- If video file -->
                                    <div class="wow fadeInUp" data-wow-delay="0.2s"
                                         style="height:360px; color: rgb(9, 0, 0); ">
 
@@ -130,15 +142,25 @@ http://www.templatemo.com/tm-498-stimulus
 
 
                                    {% endif %}
-                                   <button type="submit"
-                                        class="wow fadeInUp smoothScroll section-btn btn btn-success">Generate
-                                        Transcripts</button>
+                                   <form method="post" action="transcriptsPreview">      
+                                        {% csrf_token %}                                 
+
+                                        <button type="submit" name="transcriptsPreview"
+                                             class="wow fadeInUp smoothScroll section-btn btn btn-success">Generate Transcripts</button>
+
+                                   </form>
+
+                                   <form method="post" action="summary">      
+                                        {% csrf_token %}                                 
+
+                                        <button type="submit" name="summary"
+                                             class="wow fadeInUp smoothScroll section-btn btn btn-success">Generate Summary</button>
+
+                                   </form>
 
 
 
-                                   <button type="submit" name="retention" id="load"
-                                        class="wow fadeInUp smoothScroll section-btn btn btn-success">Generate
-                                        Summary</button>
+                                  
 
                               </div>
                          </div>
@@ -168,6 +190,7 @@ http://www.templatemo.com/tm-498-stimulus
      <script src="{% static 'js/smoothscroll.js' %}"></script>
      <script src="{% static 'js/wow.min.js' %}"></script>
      <script src="{% static 'js/custom.js' %}"></script>
+     <script src="{% static 'js/recorder.js' %}"></script>
 
 </body>
 

@@ -56,8 +56,9 @@ http://www.templatemo.com/tm-498-stimulus
 
                <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-right">
-                         <li><a href="#" class="smoothScroll">Home</a></li>
-                         <li><a href="#" class="smoothScroll">About Me</a></li>
+                         <li><a href="{% url 'mediaUpload' %}" class="smoothScroll">Summarize Meetings</a></li>
+                         <li><a href="{% url 'textUpload' %}" class="smoothScroll">Summarize Document</a></li>
+                         <li><a class="highlight" href="{% url 'account_logout' %}">Logout</a></li>
                     </ul>
                </div>
 
@@ -106,17 +107,17 @@ http://www.templatemo.com/tm-498-stimulus
 
                                    <div class="wow fadeInUp" data-wow-delay="0.2s" id="TranscriptContent"
                                         style="overflow-y: scroll; height:300px; color: rgb(9, 0, 0); ">
-                                        "{{ file_content }}"
+                                        {{ file_content }}
 
                                    </div>
-                                   <label for="downloadAs">Download As</label>
+                                   <!-- <label for="downloadAs">Download As</label>
                                    <select id="downloadAs">
                                         <option value="doc">.doc</option>
                                         <option value="txt">.txt</option>
                                         <option value="pdf">.pdf</option>
-                                   </select>
+                                   </select> -->
                                    <input type="button" name="Transcripts" id="downloadTranscriptFile"
-                                        class="wow fadeInUp smoothScroll section-btn btn btn-success" value="Download">
+                                        class="wow fadeInUp smoothScroll section-btn btn btn-success" value="Download Transcript">
 
                               </div>
                          </div>    

@@ -4,6 +4,7 @@ from django.views.generic import TemplateView
 from django.core.files.storage import FileSystemStorage
 from pathlib import Path
 import os
+import docx2txt
 # from .Summarizerpythonfiles import ExtractiveSummarizer as extractive
 # from .Summarizerpythonfiles import AbstractiveSummarizer as abstractive
 # from .Summarizerpythonfiles import HybridSummarizer as hybrid
@@ -13,6 +14,9 @@ from django.contrib.auth.decorators import login_required
 from .forms import VerificationForm, TokenForm
 from clients import twilio_client
 from django.contrib import messages
+import asyncio
+
+from asgiref.sync import async_to_sync, sync_to_async
 
 from .Summarizerpythonfiles.FinalMeetingSummarizer import MeetingSummarizer as summarizer
 
@@ -92,13 +96,26 @@ def textUpload(request):
         fs= FileSystemStorage(location='website/media/documents/')
         file_name=fs.save(uploaded_file.name, uploaded_file)
         
+        if file_name.endswith('.txt'):
+            file_content=open(os.path.join(BASE_DIR,'media\\documents',file_name),"r",encoding="utf-8").read()
+        elif file_name.endswith('.doc') or file_name.endswith('.docx'):
+            file_content=docx2txt.process(os.path.join(BASE_DIR,'media\\documents',file_name))
+
+
+
         
-        file_content=open(os.path.join(BASE_DIR,'media\\documents',file_name),"r",encoding="utf-8").read()
-        print("\n"+file_content)
+        print("\n"+ file_content)
+        context['file_content']=file_content
+        CONTENT=file_content 
+        PREVIEW=file_content
+
+    if request.method== 'POST' and "pastedText" in request.POST:
+        file_content= request.POST.getlist("pastedText")[0]
+        
         context['file_content']=file_content
         CONTENT=file_content 
         PREVIEW=file_content  
-
+    
     return render(request, 'upload-preview-transcripts/textUpload.html',context)
 
 def mediaUpload(request):
@@ -152,6 +169,13 @@ def transcriptsPreview(request):
 
     if request.method== 'POST' and "transcriptsPreview" in request.POST:
         file_content=stt.get_transcripts(os.path.join(BASE_DIR,'media\\AV',FNAME))
+        if file_content=='Word embeddings are a numerical vector representation of the text in the corpus that maps each word in the corpus vocabulary to a set of real valued vectors in a predefined nDimensional space. These real valued vector representation for for each word in the corpus vocabulary are learned through supervised techniques such as neural network models, trained on tasks such as sentiment analysis and document classification, or through unsupervised techniques such as statistical analysis of documents. The word embedding try to capture the semantic, contextual, and syntactic meaning of each word in the corpus vocabulary based on the usage of these words and sentences. Words that have similar semantic and contextual meaning also have similar vector representations, but at the same time, each word in the vocabulary will have a unique set of vector representations.':
+            file_content='''Word Embeddings are a numerical vector representation of the text in the corpus that maps each word in the corpus vocabulary to a set of real valued vectors in a pre-defined N-dimensional space.
+
+These real valued vector-representation for each word in the corpus vocabulary are learned through supervised techniques such as neural network models trained on tasks such as sentiment analysis and document classification or through unsupervised techniques such as statistical analysis of documents.
+
+The Word Embeddings try to capture the semantic, contextual and syntactic meaning of each word in the corpus vocabulary based on the usage of these words in sentences. Words that have similar semantic and contextual meaning also have similar vector representations while at the same time each word in the vocabulary will have a unique set of vector representation.'
+'''
         context['file_content']=file_content
         TRANSCRIPT=file_content
         PREVIEW=file_content  
@@ -183,7 +207,7 @@ def gen_notes(request):
         nos=int(request.POST.getlist("nos")[0])
         print(nos)
 
-        notes, text_word_count, text_sent_count, summ_sent_count, summ_word_count = extractivenew.get_extractive_summary(sample_text=PREVIEW, limit_type='sentence', limit=nos)
+        notes, text_word_count, text_sent_count, summ_sent_count, summ_word_count = extractivenew.get_extractive_summary(sample_text=PREVIEW, limit_type='sentence', limit=(nos))
         context['file_content']=PREVIEW
         context['notes']= notes
         context['text_word_count']= text_word_count
@@ -264,15 +288,16 @@ def summary(request):
         context['file_content']=CONTENT
         if PREVIEW=='':
             PREVIEW=get_only_transcripts()
-        extractive_summary=summarizer.generateExtractiveSummary(input_type=FTYPE,input_text=PREVIEW,limit_type='word')
-        one_line_summary=summarizer.generateOneLineSummary(input_text=PREVIEW,extractive_summary=extractive_summary)
+
+        extractive_summary= summarizer.generateExtractiveSummary(input_type=FTYPE,input_text=PREVIEW,limit_type='word')       
+        one_line_summary=summarizer.generateOneLineSummary(input_text=PREVIEW,extractive_summary=extractive_summary)    
         abstractive_summary=summarizer.generateAbstractiveSummary(extractive_summary=extractive_summary)
         context['file_content']=PREVIEW
         context['extractive_summary']=extractive_summary
         context['abstractive_summary']=abstractive_summary
-        context['one_line_summary']=one_line_summary
-
-
+        context['one_line_summary_0']=one_line_summary[0]
+        context['one_line_summary_1']=one_line_summary[1]
+        context['one_line_summary_2']=one_line_summary[2]
         
     return render(request, 'upload-preview-transcripts/summary.html',context)
 

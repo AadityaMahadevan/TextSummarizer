@@ -1,3 +1,4 @@
+import math
 import numpy as np
 import pandas as pd
 import re
@@ -97,7 +98,7 @@ def remove_redundancy(sentence_scores, limit,limit_type ):
     count = 0
     sentences_summary = []
     for s in sentence_scores:
-        if count>=limit:
+        if count==limit:
             break
         include_flag = True
         for ps in sentences_summary:

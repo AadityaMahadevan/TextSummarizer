@@ -1,0 +1,20 @@
+Dragonflies use a combination of visual cues and precise control of their wing pitch to perform aerial acrobatics.
+
+The four-winged insects can rapidly right themselves from an upside-down position but until now, researchers weren’t sure how they performed the feat. Jane Wang, who studies the physics of living organisms at Cornell University in New York, first noticed the intriguing behaviour almost eight years ago. To her surprise, when she dropped a dragonfly headfirst, the insect flipped itself faster than her eyes could follow.
+
+So Wang and her colleagues designed a series of experiments to find out exactly how the insects managed it. First, they painted white dots on the wings and bodies of seven dragonflies. Then, they released the insects upside down and recorded their movement with a high-speed video camera. They slowed down the footage to get a better look at the precise wing angles and used a computer algorithm to create a three-dimensional model of the dragonflies in motion.
+
+The digital simulation revealed what Wang’s eyes couldn’t see: the dragonflies were pitching their right and left wings at different angles to flip over in just 200 milliseconds.
+
+“When dragonflies normally beat their wings, they are constantly changing their pitch,” says Wang. “Now, on top of that, they have to create a difference between the left and the right wings – just by a small amount.”
+
+Some dragonflies rolled to the right, others went left. But in all cases, the insects used a similar asymmetrical wing angle to flip in mid-air.
+
+The experiment revealed the physical mechanism of the dragonflies’ lightning-fast rotation, but didn’t answer how they sensed that they were upside down to begin with. Drawing on previous research, Wang says she suspected they might be using visual input from their large, multi-lens eyes, or from light-sensitive organs called ocelli on top of their head.
+
+The team then blocked the dragonflies’ eyes and ocelli with an opaque black paint, and again released the insects upside down. This time, they couldn’t right themselves. “Sometimes they didn’t flap their wings at all,” says Wang.
+
+The researchers concluded that visual signals must help the insects orient themselves in space, which then prompts a specific wing movement. Wang suspects dragonflies aren’t the only ones employing this two-part technique.
+
+“I think almost all flying insects have such an ability, because it’s a necessity,” she says. “Dragonflies are one of the most ancient insects. If they have already evolved it, I suspect the modern ones have a similar ability.”
+

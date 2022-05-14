@@ -29,7 +29,7 @@ def generateExtractiveSummary(input_type, input_text,limit_type):
     """ Parameters for extractive summarization"""
     #For Summarization
     minimum_word_count = 50
-    retention_percent = 60
+    retention_percent = 80
     word_limit = 300
 
     #For note-taking

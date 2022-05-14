@@ -1,4 +1,4 @@
-function download(text, file_type) {
+function download(text, file_type,) {
 
     if (file_type == 'txt') {
         var element = document.createElement('a');
@@ -13,18 +13,17 @@ function download(text, file_type) {
 
         document.body.removeChild(element);
     }
+    
 }
 
 document.getElementById("downloadTranscriptFile").addEventListener("click", function(){
-    console.log("plssssss");
 
-    // Generate download of hello.txt file with some content
-    var downloadAs = document.getElementById("downloadAs");
-    var file_type = downloadAs.value;
+    //var downloadAs = document.getElementById("downloadAs");
+    var file_type = 'txt'//downloadAs.value;
     var text = document.getElementById("TranscriptContent").textContent;
-    console.log("plssssss");
     download(text,file_type);
 }, false);
+
 
 
 

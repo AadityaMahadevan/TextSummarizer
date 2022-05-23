@@ -8,21 +8,55 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
     integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
   <link rel="stylesheet" type="text/css">
-   <!-- CSS -->
-   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,600">
-   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.6/css/all.css">
-   <link rel="stylesheet" href="{% static 'css/animate.css'%}">
-   <link rel="stylesheet" href="{%  static 'hstyle.css' %}">
-   <link rel="stylesheet" href="{% static 'css/media-queries.css'%}">
+  <!-- CSS -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,700&amp;display=swap">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.6/css/all.css">
+  <link rel="stylesheet" href="{%  static 'hstyle.css' %}">
   <title>{% block title %} Minutes {% endblock %}</title>
 </head>
 <!-- style="background-color:#decdc3" -->
 
 <body>
-  
-  			
-		<!-- Top menu -->
+  <header id="header" class="menu-container">
+
+    <!--   Logo -->
+    <div class="logo-box">
+      <svg id="header-img" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"
+        id="Capa_1" x="0px" y="0px" viewBox="0 0 477.867 477.867" style="enable-background:new 0 0 477.867 477.867;"
+        xml:space="preserve">
+        <a href="{% url ''%}"></a>
+        <g>
+          <g>
+            <g>
+              <path
+                d="M375.467,136.533c-53.333,0-110.933,51.661-136.533,77.534c-25.6-25.873-83.2-77.534-136.533-77.534    c-64.119,0-102.4,38.281-102.4,102.4s38.281,102.4,102.4,102.4c53.333,0,110.933-51.661,136.533-77.534    c25.6,25.873,83.2,77.534,136.533,77.534c64.12,0,102.4-38.281,102.4-102.4S439.586,136.533,375.467,136.533z M102.4,307.2    c-45.295,0-68.267-22.972-68.267-68.267s22.972-68.267,68.267-68.267c37.547,0,87.381,42.308,113.118,68.267    C189.833,264.926,140.1,307.2,102.4,307.2z M375.467,307.2c-37.547,0-87.381-42.308-113.118-68.267    c25.6-25.975,75.418-68.267,113.118-68.267c45.295,0,68.267,22.972,68.267,68.267S420.762,307.2,375.467,307.2z"
+                data-original="#000000" class="active-path" data-old_color="#000000" fill="#3c1361" />
+            </g>
+          </g>
+        </g>
+      </svg>
+    </div>
+    <!--   Logo -->
+
+    <!--   navbar -->
+    <nav id="nav-bar">
+      <input class="menu-btn" type="checkbox" id="menu-btn" />
+      <label class="menu-icon" for="menu-btn"><span class="nav-icon"></span></label>
+      <ul class="menu">
+        <li><a href="{% url 'mediaUpload' %}" class="nav-link">Summarize Meetings</a></li>
+        <li><a href="{% url 'textUpload' %}" class="nav-link">Summarize Documents</a></li>
+        <a class="highlight" href="{% url 'account_logout' %}">Logout</a>
+      </ul>
+    </nav>
+    <!--   navbar -->
+  </header>
+  <!-- header ends -->
+
+  <!-- Top menu -->
+  <!--
 		<nav class="navbar navbar-dark fixed-top navbar-expand-md navbar-no-bg">
 			<div class="container">
 				<a class="navbar-brand" href="{% url ''%}">HOME</a>
@@ -32,21 +66,21 @@
 			    <div class="collapse navbar-collapse" id="navbarNav">
 			        <ul class="navbar-nav ml-auto">
 			            <li class="nav-item">
-			                <a class="nav-link scroll-link" href="{% url 'MediaUpload' %}">Summarize Meetings</a>
+			                <a class="nav-link scroll-link" href="{% url '' %}">Summarize Meetings</a>
 			            </li>
 			            <li class="nav-item">
-			                <a class="nav-link scroll-link" href="{% url 'TextUpload' %}">Summarize Text</a>
+			                <a class="nav-link scroll-link" href="{% url '' %}">Summarize Text</a>
 			            </li>
 			            <li class="nav-item">
-			                <a class="nav-link scroll-link" href="{% url 'MediaUpload1' %}">Audio Transcripts</a>
+			                <a class="nav-link scroll-link" href="{% url '' %}">Audio Transcripts</a>
 			            </li>
                   {% if user.is_authenticated %}
 			              <li class="nav-item">
-			                  <a class="nav-link scroll-link" href="{% url 'account_logout' %}">Sign Out</a>
+			                  <a class="nav-link scroll-link" href="{% url '' %}">Sign Out</a>
 			              </li>
                   {% else %}
                     <li class="nav-item">
-                    <a class="nav-link scroll-link" href="{% url 'account_logout' %}">Login</a>
+                    <a class="nav-link scroll-link" href="{% url '' %}">Login</a>
                     </li>
                   {% endif %}  
 
@@ -54,12 +88,12 @@
 			    </div>
 		    </div>
 		</nav>
+  -->
 
-       
-  
-            {% block content %}
-            {% endblock %}
-         
+
+  {% block content %}
+  {% endblock %}
+
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
     integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
     crossorigin="anonymous"></script>

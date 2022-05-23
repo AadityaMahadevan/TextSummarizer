@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<!-- <script>
+  function copyToClipboard(x){
+    navigator.clipboard.writeText(x);
+    console.log("ok");
+  }
+
+</script> -->
+
+<div style="overflow-y: scroll;" class="card w-75 mx-auto ">
+    <div class="card-body">
+      <h5 style="color: black;" class="card-title">Extractive Summary</h5>
+      <p style="color: black;" class="card-text">{{ extractive_summary }}</p>
+      <!-- <button onclick="copyToClipboard(extractive_summary)">Copy text</button> -->
+
+    </div>
+</div>
+
+<div style="overflow-y: scroll;" class="card w-75 mx-auto">
+    <div class="card-body">
+      <h5 style="color: black;" class="card-title">Abstractive Summary</h5>
+      <p style="color: black;" class="card-text">{{ abstractive_summary }}</p>
+    </div>
+</div>
+
+<div style="overflow-y: scroll;" class="card w-75 mx-auto">
+    <div class="card-body">
+      <h5 style="color: black;" class="card-title">One-Line Summary</h5>
+      <p style="color: black;">{{ one_line_summary }}</p>
+    </div>
+</div>
+
+<!-- <h2>Extractive Summary</h2>
+
+<div style="overflow-y: scroll; height:300px; ">
+    "{{ extractive_summary }}"
+
+</div>
+<br>
+<h2>Abstractive Summary</h2>
+<div style="overflow-y: scroll; height:300px; ">
+    "{{ abstractive_summary }}"
+
+</div>
+<br>
+<h2>One-Line Summary</h2>   
+<div style="height:300px; ">
+    "{{ one_line_summary }}"
+
+</div> -->
+
+{% endblock %}

@@ -169,13 +169,6 @@ def transcriptsPreview(request):
 
     if request.method== 'POST' and "transcriptsPreview" in request.POST:
         file_content=stt.get_transcripts(os.path.join(BASE_DIR,'media\\AV',FNAME))
-        if file_content=='Word embeddings are a numerical vector representation of the text in the corpus that maps each word in the corpus vocabulary to a set of real valued vectors in a predefined nDimensional space. These real valued vector representation for for each word in the corpus vocabulary are learned through supervised techniques such as neural network models, trained on tasks such as sentiment analysis and document classification, or through unsupervised techniques such as statistical analysis of documents. The word embedding try to capture the semantic, contextual, and syntactic meaning of each word in the corpus vocabulary based on the usage of these words and sentences. Words that have similar semantic and contextual meaning also have similar vector representations, but at the same time, each word in the vocabulary will have a unique set of vector representations.':
-            file_content='''Word Embeddings are a numerical vector representation of the text in the corpus that maps each word in the corpus vocabulary to a set of real valued vectors in a pre-defined N-dimensional space.
-
-These real valued vector-representation for each word in the corpus vocabulary are learned through supervised techniques such as neural network models trained on tasks such as sentiment analysis and document classification or through unsupervised techniques such as statistical analysis of documents.
-
-The Word Embeddings try to capture the semantic, contextual and syntactic meaning of each word in the corpus vocabulary based on the usage of these words in sentences. Words that have similar semantic and contextual meaning also have similar vector representations while at the same time each word in the vocabulary will have a unique set of vector representation.'
-'''
         context['file_content']=file_content
         TRANSCRIPT=file_content
         PREVIEW=file_content  

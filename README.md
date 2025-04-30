@@ -45,6 +45,6 @@ This project was published in the **2023 IEEE 14th International Conference on C
 **Citation**:  
 *A Mahadevan, A Pillai, J Lamba - Minutes: Hybrid Text Summarizer for Online Meetings*
 
-**Paper link**: [https://ieeexplore.ieee.org/document/10254909](https://ieeexplore.ieee.org/document/10254909)
+**Paper link**: [https://ieeexplore.ieee.org/document/10306385](https://ieeexplore.ieee.org/document/10306385)
 
 ---
